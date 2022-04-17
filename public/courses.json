@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "subject": "Physics",
+        "courseDetail": "Physics is a royal subject of science ever. That's why I'm offering Physics at a very low fees",
+        "fees": 80,
+        "img": "https://i.ibb.co/FmxHs0J/physics.jpg"
+    },
+    {
+        "id": 2,
+        "subject": "Chemistry",
+        "courseDetail": "Chemistry is a core subject of science. Nothing can't be imagined without it. That's why I'm offering Chemistry at a very reasonable fees",
+        "fees": 50,
+        "img": "https://i.ibb.co/D1d2RJp/chemistry.jpg"
+    },
+    {
+        "id": 3,
+        "subject": "Mathematics",
+        "courseDetail": "Science can't find its existance without mathematics . That's why Mathematics can be teach with great care and low fees",
+        "fees": 70,
+        "img": "https://i.ibb.co/F0sQ9B4/mathematics.jpg"
+    }
+]
