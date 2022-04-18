@@ -19,9 +19,10 @@ const SignUp = () => {
         return <p>Loading...</p>;
     }
     if (user) {
+        console.log(user)
         return (
             <div>
-                <p>Registered User: {user.email}</p>
+                <p>Registered User: {user?.user?.email}</p>
             </div>
         );
     }
@@ -39,6 +40,7 @@ const SignUp = () => {
         event.preventDefault();
         createUserWithEmailAndPassword(email, password);
     }
+
 
     return (
         <div className='w-50 mx-auto mt-5'>
