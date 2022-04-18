@@ -1,0 +1,11 @@
+.cart-icon {
+    position: absolute;
+    right: 0;
+}
+
+@media only screen and(max-width: 992px) {
+    .cart-icon {
+        bottom: 0;
+        background-color: aqua;
+    }
+}
