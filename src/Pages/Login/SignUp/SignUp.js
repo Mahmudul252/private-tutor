@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
 
-const SignUp = ({ handleSignUp }) => {
+const SignUp = () => {
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -55,8 +56,9 @@ const SignUp = ({ handleSignUp }) => {
                 {error && <p className="text-danger">{error.message}</p>}
 
                 <Button className='w-25 d-block mx-auto' variant="secondary" type="submit">
-                    Submit
+                    Sign Up
                 </Button>
+                <p className='my-3'>Already have an account? <Link className='ms-2 text-decoration-none' to='/login'>Please Login</Link></p>
 
             </Form>
         </div>

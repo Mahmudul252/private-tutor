@@ -1,5 +1,5 @@
 import { signOut } from 'firebase/auth';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,11 @@ import auth from '../../../firebase.init';
 
 const Header = () => {
     const [user] = useAuthState(auth);
+    console.log(user)
+    const [userName, setUserName] = useState('');
+    useEffect(() => {
+        setUserName(user?.displayName);
+    }, [])
 
     const handleSignOut = () => {
         signOut(auth);
@@ -33,7 +38,7 @@ const Header = () => {
                         <Nav>
                             {
                                 user ? <div className='d-flex'>
-                                    <span className='text-white mt-2 me-2'>{user.displayName}</span>
+                                    <span className='text-white mt-2 me-2'>{userName}</span>
                                     <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
                                 </div>
                                     :
