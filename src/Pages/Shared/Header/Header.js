@@ -11,7 +11,7 @@ const Header = () => {
     const [userName, setUserName] = useState('');
     useEffect(() => {
         setUserName(user?.displayName);
-    }, [])
+    }, [user])
 
     const handleSignOut = () => {
         signOut(auth);

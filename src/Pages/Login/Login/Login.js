@@ -4,6 +4,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -47,11 +48,11 @@ const Login = () => {
                 {error && <p className="text-danger">{error.message}</p>}
 
                 <Button className='w-25 d-block mx-auto' variant="secondary" type="submit">
-                    Sign Up
+                    Login
                 </Button>
                 <p className='my-3'>Don't have an account? <Link className='ms-2 text-decoration-none' to='/signup'>Sign Up now</Link></p>
-
             </Form>
+            <SocialSignIn></SocialSignIn>
         </div>
     );
 };
