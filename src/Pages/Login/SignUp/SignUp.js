@@ -1,33 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 
-const SignUp = () => {
-    const [name, setName] = useState('');
+const SignUp = ({ handleSignUp }) => {
+    const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
-    if (error) {
-        return (
-            <div>
-                <p>Error: {error.message}</p>
-            </div>
-        );
-    }
-    if (loading) {
-        return <p>Loading...</p>;
-    }
-    if (user) {
-        console.log(user)
-        return (
-            <div>
-                <p>Registered User: {user?.user?.email}</p>
-            </div>
-        );
-    }
+    const [updateProfile] = useUpdateProfile(auth);
+
     const handleUserName = event => {
-        setName(event.target.value);
+        setDisplayName(event.target.value);
     }
     const handleUserEmail = event => {
         setEmail(event.target.value);
@@ -40,6 +24,11 @@ const SignUp = () => {
         event.preventDefault();
         createUserWithEmailAndPassword(email, password);
     }
+    useEffect(() => {
+        updateProfile({ displayName });
+    }, [user]);
+
+
 
 
     return (
@@ -48,11 +37,11 @@ const SignUp = () => {
             <Form onSubmit={handleCreateUser}>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Your Name</Form.Label>
-                    <Form.Control onBlur={handleUserName} type="name" placeholder="Enter Your Name" />
+                    <Form.Control onBlur={handleUserName} type="name" placeholder="Enter Your Name" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control onBlur={handleUserEmail} type="email" placeholder="Enter email" />
+                    <Form.Control onBlur={handleUserEmail} type="email" placeholder="Enter email" required />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
@@ -60,11 +49,15 @@ const SignUp = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control onBlur={handleUserPassword} type="password" placeholder="Password" />
+                    <Form.Control onBlur={handleUserPassword} type="password" placeholder="Password" required />
                 </Form.Group>
+                {loading && <p className="text-danger">Loading...</p>}
+                {error && <p className="text-danger">{error.message}</p>}
+
                 <Button className='w-25 d-block mx-auto' variant="secondary" type="submit">
                     Submit
                 </Button>
+
             </Form>
         </div>
     );
