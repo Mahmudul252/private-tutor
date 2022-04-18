@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { CardGroup } from 'react-bootstrap';
 import Course from '../Course/Course';
 
 const Courses = () => {
@@ -8,7 +7,7 @@ const Courses = () => {
         fetch('courses.json')
             .then(res => res.json())
             .then(data => setCourses(data));
-    }, [])
+    }, []);
     return (
         <div className='container mb-3'>
             <h2 className="mt-5 text-center">See My Running Courses</h2>

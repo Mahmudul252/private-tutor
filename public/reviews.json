@@ -1,0 +1,20 @@
+[
+    {
+        "id": 101,
+        "name": "Robert jackson",
+        "img": "https://i.ibb.co/CHdfBxq/student1.jpg",
+        "studentReview": "Awesome Tutor. I Learnt many things from him."
+    },
+    {
+        "id": 102,
+        "name": "David Lerner",
+        "img": "https://i.ibb.co/vDTmzRC/student2.jpg",
+        "studentReview": "He teach me many new thing with great care. I like him."
+    },
+    {
+        "id": 103,
+        "name": "Princes Angelina",
+        "img": "https://i.ibb.co/r7qyT3m/student3.jpg",
+        "studentReview": "I have never ever seen a tutor like him. Very helpful tutor."
+    }
+]
