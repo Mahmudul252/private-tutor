@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Link as button, Link } from 'react-router-dom';
 import useCourses from '../../../hooks/useCourses';
-import Checkout from '../../Checkout/Checkout';
 import Cart from '../../Shared/Cart/Cart';
 import Course from '../Course/Course';
 import './Courses.css';

@@ -1,5 +1,4 @@
 import { signOut } from 'firebase/auth';
-import React, { useEffect, useState } from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
@@ -7,11 +6,10 @@ import auth from '../../../firebase.init';
 
 const Header = () => {
     const [user] = useAuthState(auth);
-    console.log(user)
-    const [userName, setUserName] = useState('');
-    useEffect(() => {
-        setUserName(user?.displayName);
-    }, [user])
+
+    // tried a lot to show username at first render but it not happening. showing username in nav bar after reload the page. sorry... -_-
+
+    //the problem is happening only when creating user with email and password. as the process don't use the name, that's why I set username after successful user creation. and this component only takes the first step of user creation rather than update userInfo
 
     const handleSignOut = () => {
         signOut(auth);
@@ -25,20 +23,15 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="#features">Features</Nav.Link>
-                            <Nav.Link href="#pricing">Pricing</Nav.Link>
-                            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown>
+                            <Nav.Link as={Link} to="/courses">Courses</Nav.Link>
+                            <Nav.Link as={Link} to="/reviews">Student Reviews</Nav.Link>
+                            <Nav.Link as={Link} to="/blogs">Blogs</Nav.Link>
+                            <Nav.Link as={Link} to="/about">About Me</Nav.Link>
                         </Nav>
                         <Nav>
                             {
                                 user ? <div className='d-flex'>
-                                    <span className='text-white mt-2 me-2'>{userName}</span>
+                                    <span className='text-white mt-2 me-2'>{user?.displayName}</span>
                                     <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
                                 </div>
                                     :
@@ -47,6 +40,7 @@ const Header = () => {
                                         <Nav.Link as={Link} to='/signup'>Sign Up</Nav.Link>
                                     </div>
                             }
+
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

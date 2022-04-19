@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-
 import { Button, Form } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
+import './Login.css';
 
 const Login = () => {
     const location = useLocation();
@@ -36,7 +36,7 @@ const Login = () => {
 
 
     return (
-        <div className='w-50 mx-auto mt-5'>
+        <div className='mx-auto mt-5 login-form'>
             <h2 className='mb-3'>Please Login</h2>
             <Form onSubmit={handleUserLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -53,7 +53,7 @@ const Login = () => {
                 {loading && <p className="text-danger">Loading...</p>}
                 {error && <p className="text-danger">{error.message}</p>}
 
-                <Button className='w-25 d-block mx-auto' variant="secondary" type="submit">
+                <Button className='login-button d-block mx-auto' variant="secondary" type="submit">
                     Login
                 </Button>
                 <p className='my-3'>Don't have an account? <Link className='ms-2 text-decoration-none' to='/signup'>Sign Up now</Link></p>

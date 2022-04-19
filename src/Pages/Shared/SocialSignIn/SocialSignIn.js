@@ -32,10 +32,10 @@ const SocialSignIn = ({ from }) => {
                 <div style={{ height: '1px' }} className='bg-secondary w-50'></div>
             </div>
             <div className="d-flex justify-content-center my-3">
-                <button onClick={() => handleSocialSignIn('google')} className="btn btn-secondary w-50 fs-5">Sign In with Google   <FontAwesomeIcon className='ms-1' icon={faGoogle} /></button>
+                <button onClick={() => handleSocialSignIn('google')} className="btn btn-secondary social-login-button fs-5">Sign In with Google   <FontAwesomeIcon className='ms-1' icon={faGoogle} /></button>
             </div>
             <div className="d-flex justify-content-center">
-                <button onClick={() => handleSocialSignIn('github')} className="btn btn-secondary w-50 fs-5">Sign In with Github   <FontAwesomeIcon className='ms-1' icon={faGithub} /></button>
+                <button onClick={() => handleSocialSignIn('github')} className="btn btn-secondary social-login-button fs-5">Sign In with Github   <FontAwesomeIcon className='ms-1' icon={faGithub} /></button>
             </div>
         </div>
     );
