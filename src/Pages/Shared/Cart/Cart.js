@@ -7,7 +7,6 @@ const Cart = ({ addedCourses, totalFees }) => {
     const handleCheckout = () => {
 
     }
-    console.log(addedCourses)
 
     return (
         <div className='w-100'>

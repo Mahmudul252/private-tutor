@@ -15,6 +15,7 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [passwordMatched, setPasswordMatched] = useState(false);
+    const [passwordLength, setPasswordLength] = useState(false);
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const [sendEmailVerification, sending] = useSendEmailVerification(auth);
@@ -29,7 +30,6 @@ const SignUp = () => {
         setPassword(event.target.value);
     }
     const handleUserRetypePassword = event => {
-        ;
         if (password !== event.target.value) {
             setPasswordMatched(false);
             setErrorMessage("Password don't match");
@@ -39,21 +39,16 @@ const SignUp = () => {
         }
     }
     const from = location?.state?.from?.pathname || '/';
-
     const handleCreateUser = (event) => {
         event.preventDefault();
         createUserWithEmailAndPassword(email, password)
             .then(async () => {
+                toast("Email Verification Sent")
                 await updateProfile({ displayName });
                 await sendEmailVerification();
             })
-            .then(() => {
-                navigate(from, { replace: true });
-            });
+            .then(() => navigate(from, { replace: true }));
 
-    }
-    if (sending) {
-        toast("Email Verification Sent");
     }
 
     return (
@@ -71,7 +66,7 @@ const SignUp = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control onBlur={handleUserPassword} type="password" placeholder="Password" required />
+                    <Form.Control onChange={handleUserPassword} type="password" placeholder="Password" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Retype Password</Form.Label>

@@ -6,6 +6,10 @@
     width: 25%;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .social-login-button {
     width: 50%;
 }

@@ -13,3 +13,7 @@ This is a project of a private tutor which is representing myself. [Private Tuto
 * Email Verification
 * 404 Error Route
 * Details about me and my goal
+* React Router
+* React Firebase hooks
+* React Bootstrap
+* React FontAwesomeIcon
