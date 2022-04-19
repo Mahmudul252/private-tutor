@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const SignUp = () => {
     const location = useLocation();
@@ -15,6 +17,7 @@ const SignUp = () => {
     const [passwordMatched, setPasswordMatched] = useState(false);
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile] = useUpdateProfile(auth);
+    const [sendEmailVerification, sending] = useSendEmailVerification(auth);
 
     const handleUserName = event => {
         setDisplayName(event.target.value);
@@ -40,14 +43,18 @@ const SignUp = () => {
     const handleCreateUser = (event) => {
         event.preventDefault();
         createUserWithEmailAndPassword(email, password)
-            .then(() => updateProfile({ displayName }))
+            .then(async () => {
+                await updateProfile({ displayName });
+                await sendEmailVerification();
+            })
             .then(() => {
                 navigate(from, { replace: true });
             });
+
     }
-
-
-
+    if (sending) {
+        toast("Email Verification Sent");
+    }
 
     return (
         <div className='login-form mx-auto mt-5'>
@@ -80,6 +87,7 @@ const SignUp = () => {
                 <p className='my-3'>Already have an account? <Link className='ms-2 text-decoration-none' to='/login'>Please Login here</Link></p>
             </Form>
             <SocialSignIn from={from}></SocialSignIn>
+            <ToastContainer />
         </div>
     );
 };
