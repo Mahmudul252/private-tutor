@@ -3,16 +3,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
+import { useNavigate } from 'react-router-dom';
 
-const SocialSignIn = () => {
+const SocialSignIn = ({ from }) => {
+    // const location = useLocation();
+    const navigate = useNavigate();
     const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
     const [signInWithGithub, githubUser] = useSignInWithGithub(auth);
     const handleSocialSignIn = (method) => {
         if (method === 'google') {
-            signInWithGoogle();
+            signInWithGoogle()
+                .then(() => {
+                    navigate(from, { replace: true });
+                })
         }
         if (method === 'github') {
-            signInWithGithub();
+            signInWithGithub()
+                .then(() => {
+                    navigate(from, { replace: true });
+                })
         }
     }
     return (

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
 
 const Login = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [
@@ -22,10 +24,14 @@ const Login = () => {
     const handleUserPassword = event => {
         setPassword(event.target.value);
     }
+    const from = location?.state?.from?.pathname || '/';
 
     const handleUserLogin = event => {
         event.preventDefault();
-        signInWithEmailAndPassword(email, password);
+        signInWithEmailAndPassword(email, password)
+            .then(() => {
+                navigate(from, { replace: true });
+            })
     }
 
 
@@ -52,7 +58,7 @@ const Login = () => {
                 </Button>
                 <p className='my-3'>Don't have an account? <Link className='ms-2 text-decoration-none' to='/signup'>Sign Up now</Link></p>
             </Form>
-            <SocialSignIn></SocialSignIn>
+            <SocialSignIn from={from}></SocialSignIn>
         </div>
     );
 };
