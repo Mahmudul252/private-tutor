@@ -35,7 +35,7 @@ const Header = () => {
                                     <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
                                 </div>
                                     :
-                                    <div className="d-flex">
+                                    <div className="d-flex flex-lg-row flex-column">
                                         <Nav.Link as={Link} to='/login'>Login</Nav.Link>
                                         <Nav.Link as={Link} to='/signup'>Sign Up</Nav.Link>
                                     </div>
